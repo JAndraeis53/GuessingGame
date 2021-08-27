@@ -7,50 +7,44 @@ namespace GussingGame
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("difficulty level? 1 - easy, 2 - medium, 3 - hard");
+            var difficulty = int.Parse(Console.ReadLine());
 
-            int GuessCount = 3;
+            int secretNumber = new Random().Next(1, 101); 
 
-// Display a message to the user asking them to guess the secret number.
-            Console.WriteLine("Dare to guess my secret number");
-// Display a prompt for the user's guess.
-            Console.Write("Enter a number if you dare ");
-// Take the user's guess as input and save it as a variable.
-            string response = Console.ReadLine();
-// Display the user's guess back to the screen.
-            Console.WriteLine(response);
+            var difficultiesTries = new int[]{ 8, 6, 4 };
 
-
-
-// Create a variable to contain the secret number. This number should be hard-coded for now. 42 is a nice number.
-            int secretNumber = 42; 
-// No longer display the user's guess. They know what they guessed, right?
-            int guess = int.Parse(response);
-// Compare the user's guess with the secret number. Display a success message if the guess is correct, otherwise display a failure message.
-        while (GuessCount < 4)
-        {
-            if (secretNumber == guess)
+            for (int i = difficultiesTries[difficulty - 1]; i > 0; i--)
             {
-                Console.WriteLine("...Congratulations...");
-                break;
-            }
-            else 
-            {
-                if (secretNumber != guess)
+                Console.WriteLine("Dare to guess my secret number");
+                Console.Write($"Your Guess (Guesses left: {i}): ");
+                var response = int.Parse(Console.ReadLine());
+
+
+                if (secretNumber == response)
                 {
-                    Console.WriteLine($"FAILURE! You only have {GuessCount} tries left");
-                    guess = int.Parse(Console.ReadLine());
-                    GuessCount--;
+                    Console.WriteLine("...Congratulations...");
+                    break;
                 }
-            if (GuessCount == (0))
-            {
-                Console.WriteLine($"You're too late! I WIN");
-                break;
+                else if (secretNumber > response)
+                {
+                    Console.WriteLine("Too Low");
+                }
+                else
+                {
+                    Console.WriteLine("Too High");
+                };
             }
-            }
-        }
-// Give the user four chances to guess the number.
-// Continue to display the success or failure messages as in phase 2
-
         }
     }
-}
+};
+
+// if (difficulty == 4)
+// {
+//     while (true)
+//     {
+//         Console.WriteLine("Guess the secret number!");
+//         Console.Write("Your Guess (Guesses Left: INFINITE!): ");
+//         var input = int.Parse;
+//     }
+// }
